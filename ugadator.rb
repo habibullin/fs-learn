@@ -20,7 +20,7 @@ while range > 1 do
   puts "Это число больше чем #{(max + min) / 2}?"
   a = gets.chomp.downcase
 
-  if a.include? "y"
+  if positive_answer?
     min = (((max + min) / 2) + 1)
   elsif a.include? "n"
     max = ((max + min) / 2)
@@ -37,7 +37,7 @@ else
   puts "Это число #{min}?"
   a = gets.chomp.downcase
 
-  if a.include? "y"
+  if positive_answer?
     puts "Я крут! :)"
   else
     puts "Ты загадал число #{max} :)"
@@ -46,4 +46,8 @@ end
 
 def range
   max - min
+end
+
+def positive_answer? #Знак вопроса что-то означает? Обязательно ставить?
+  a.include?("y")
 end
