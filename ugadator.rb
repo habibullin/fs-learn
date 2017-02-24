@@ -4,9 +4,9 @@ class GameRange
     $max = max.to_i
   end 
 
-  def display  
-    puts "Min is #{$min} and Max is #{$max}"  
-  end 
+  # def display  
+  #   puts "Min is #{$min} and Max is #{$max}"  
+  # end 
   
   def set_min(min)
     $min = min
@@ -18,7 +18,7 @@ class GameRange
 
   def answer(answer)
     answer == "y" ? set_min(med + 1) : set_max(med)
-    display
+    # display
   end
 
   def diff
