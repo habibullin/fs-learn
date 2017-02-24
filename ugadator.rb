@@ -1,53 +1,42 @@
-# Это не константы, т.к. ниже я перезаписываю их значение
-min = 0
-max = 100
+class GameRange
+  def initialize(min, max)  
+    $min = min.to_i
+    $max = max.to_i
+  end 
 
-puts "
-dP     dP                         dP            dP                     
-88     88                         88            88                     
-88     88 .d8888b. .d8888b. .d888b88 .d8888b. d8888P .d8888b. 88d888b. 
-88     88 88'  `88 88'  `88 88'  `88 88'  `88   88   88'  `88 88'  `88 
-Y8.   .8P 88.  .88 88.  .88 88.  .88 88.  .88   88   88.  .88 88       
-`Y88888P' `8888P88 `88888P8 `88888P8 `88888P8   dP   `88888P' dP       
-               .88                                                     
-           d8888P                                                      
-
-Загадай число от #{min} до #{max}, а я его угадаю :)
-Нажми Enter как будешь готов."
-gets
-
-while range > 1 do
-  puts "Это число больше чем #{(max + min) / 2}?"
-  a = gets.chomp.downcase
-
-  if positive_answer?
-    min = (((max + min) / 2) + 1)
-  elsif a.include? "n"
-    max = ((max + min) / 2)
-  else
-    puts "Я понимаю только Yes/No или y/n."
+  def display  
+    puts "Min is #{$min} and Max is #{$max}"  
+  end 
+  
+  def set_min(min)
+    $min = min
   end
 
-  # print "Debug: #{min}-#{max}\n"
-end
+  def set_max(max)
+    $max = max
+  end
 
-if range == 0
-  puts "Ты загадал число #{min} :)"
-else
-  puts "Это число #{min}?"
-  a = gets.chomp.downcase
+  def answer(answer)
+    answer == "y" ? set_min(med + 1) : set_max(med)
+    display
+  end
 
-  if positive_answer?
-    puts "Я крут! :)"
-  else
-    puts "Ты загадал число #{max} :)"
+  def diff
+    $max - $min
+  end
+
+  def med
+    ($max + $min) / 2
   end
 end
 
-def range
-  max - min
+
+range = GameRange.new('0','100')
+
+while range.diff > 1 do
+  puts "Это число больше чем #{range.med}?"
+  range.answer(a = gets.chomp.downcase)
 end
 
-def positive_answer? #Знак вопроса что-то означает? Обязательно ставить?
-  a.include?("y")
-end
+puts "Это число #{$min}?"
+gets.chomp.downcase == "y" ? (puts "Я угадал :)") : (puts "Ты загадал число #{$max} :)")
