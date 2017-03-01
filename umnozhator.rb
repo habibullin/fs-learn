@@ -16,8 +16,8 @@ class Number
 
   def result answer
     mult = 1
-    answer.split('').each { |i| mult *= i } #'*': String can't be coerced into Fixnum (TypeError)
-    puts mult
+    answer.split("").map(&:to_i).each { |i| mult *= i }
+    puts "Произведение цифр введенного числа равно #{mult}"
   end
 end
 
