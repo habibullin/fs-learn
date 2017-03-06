@@ -2,7 +2,7 @@ class Number
   def initialize(answer)
     @answer = answer
 
-    while is_number? (@answer) #&& @answer.length == 6
+    while is_number? (@answer) or @answer.length != 6 #why not work if use '||' instead 'or'?
       puts "Нужно ввести 6-значное число без букв или других символов"
       @answer = gets.chomp
     end
