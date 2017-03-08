@@ -1,3 +1,4 @@
+#v1 with user input
 # class Number
 #   def initialize(answer)
 #     @answer = answer
@@ -30,6 +31,8 @@
 # answer = Number.new(gets.chomp)
 
 
+
+#v2 with file read
 def count number
   n = 0
   number.split("").map(&:to_i).each { |i| n += i }
@@ -43,14 +46,6 @@ arr.each { |x|
   first = count (numb[0])
   last = count (numb[1])
   first == last ? (x.to_s << "_1") : (x.to_s << "_0")
-  # puts x
-  # x.scan(/.../).map {|e| e }
-  # puts x[0]
-  # puts x[1]
-  # puts "."
-  # first = count (x[0])
-  # last = count (x[1])
-  # first == last ? (x.to_s << "_1") : (x.to_s << "_0")
 }
 
 File.open('out-happyficator.txt', 'w'){ |file|
