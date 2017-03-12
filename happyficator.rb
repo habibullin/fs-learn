@@ -32,7 +32,9 @@
 
 
 
-#v2 with file read
+#v2 with file read and precheck
+# Prechek algorythm is longer then without precheck
+
 def count number
   n = 0
   number.split("").map(&:to_i).each { |i| n += i }
@@ -42,10 +44,17 @@ end
 arr = File.read("out-randomizator.txt").split("\n")
 
 arr.each { |x|
-  numb = x.scan(/.../).map {|e| e }
-  first = count (numb[0])
-  last = count (numb[1])
-  first == last ? (x.to_s << "_1") : (x.to_s << "_0")
+  pre = x.split("").map(&:to_i)
+  preFirst = (pre[0] + pre[1])
+  preSecond = (pre[3] + pre[4])
+  if (preFirst - preSecond).abs <= 9
+    numb = x.scan(/.../).map {|e| e }
+    first = count (numb[0])
+    last = count (numb[1])
+    first == last ? (x.to_s << "_1") : (x.to_s << "_0")
+  else
+    x.to_s << "_0 preCheck"
+  end
 }
 
 File.open('out-happyficator.txt', 'w'){ |file|
